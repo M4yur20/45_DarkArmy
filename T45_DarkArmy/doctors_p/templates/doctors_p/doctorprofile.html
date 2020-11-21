@@ -109,7 +109,7 @@
                 <h2 style="text-color:white;" align="right"><a href="{% url 'accounts:hreg'%}">Register a Hospital</a></h2>
 
 <h1> Your Profile</h1>
-
+<h3><a href="{% url 'doctor:dnotify'%}"> Your Notifications</a></h3>
         <form class="logout" action="{% url 'accounts:logout'%}" method="POST">
             {% csrf_token %}
            Your First Name : {{doctor.first_name}}<br>

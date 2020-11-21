@@ -30,4 +30,4 @@ def tconfirm(request):
     notification.accepted=True
     notification.save()
     treatment.save()
-    return redirect('doctor_p:dprof')
+    return redirect('doctor:dprof')

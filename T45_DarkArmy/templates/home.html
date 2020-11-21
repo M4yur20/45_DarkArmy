@@ -21,13 +21,13 @@
                 <button style="border: none;" type="submit"> Logout</button><!-- iska placement thek kar -->
                 {% else %}
               <div class="w3-col s4">
-                <a href="{% url 'accounts:plogin' %}" class="w3-button w3-block" > Login for Patient</a>
+                <a href="{% url 'accounts:plogin' %}" class="w3-button w3-block" > Login as Patient</a>
             </div>
             <div class="w3-col s4">
-                <a href="{% url 'accounts:dlogin' %}" class="w3-button w3-block" > Login for Doctors</a>
+                <a href="{% url 'accounts:dlogin' %}" class="w3-button w3-block" > Login as Doctor</a>
             </div>
             <div class="w3-col s4">
-                <a href="{% url 'accounts:ilogin' %}" class="w3-button w3-block" > Login for Insurance Agents</a>
+                <a href="{% url 'accounts:ilogin' %}" class="w3-button w3-block" > Login as Insurance Agent</a>
             </div>
             {% endif %}
             </form>

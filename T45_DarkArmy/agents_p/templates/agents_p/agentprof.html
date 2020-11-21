@@ -6,11 +6,17 @@
 </head>
 <body>
     <div>
+        {% if user.is_authenticated %}
+        <form class="logout" action="{% url 'accounts:logout'%}" method="POST">
+        {% csrf_token %}
         <h3 align="center"><u>Your Profile</u></h3><hr>
         First Name : {{agent.first_name}}<br>
         Last Name : {{agent.last_name}}<br>
         Email : {{agent.email_id}}<br>
         Contact Number : {{agent.contact_no}}<br>
+        <button style="border: none;" type="submit"> Logout</button><!-- iska placement thek kar -->
+        {% endif %}
+        </form>
     </div>
 </body>
 </html>

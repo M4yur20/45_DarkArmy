@@ -1,7 +1,7 @@
 from django.http.response import HttpResponse
 from django.shortcuts import render, redirect
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
-from tensorflow.python.keras.saving.save import load_model
+# from tensorflow.python.keras.saving.save import load_model
 from .models import Profile, Doctor
 from django.contrib.auth.models import User
 from django.contrib.auth import login, logout
@@ -10,7 +10,7 @@ from geopy.geocoders import Nominatim
 from geopy.distance import geodesic
 from .utils import get_geo, get_center_coordinates, get_zoom
 from django.contrib.auth.decorators import user_passes_test
-<<<<<<< HEAD
+'''<<<<<<< HEAD
 import cv2
 import numpy as np
 from keras.models import model_from_json
@@ -19,7 +19,7 @@ from keras.optimizers import Adam
 
 labels=['Bite','Burns','Cuts','Fractures']
 =======
->>>>>>> 23b909c70aec81601ad6d5816f1148e728eeda63
+>>>>>>> 23b909c70aec81601ad6d5816f1148e728eeda63'''
 
 
 def nearesthosps(request):
@@ -73,6 +73,12 @@ def nearesthosps(request):
     else:
         form = TreatmentForm()
     return render(request, 'accounts/addimg.html', {'form': form})
+
+
+def logout_view(request):
+    if request.method == 'POST':
+        logout(request)
+        return redirect('home')
 
 
 def hosp_reg(request):

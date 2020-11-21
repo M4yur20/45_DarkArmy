@@ -12,7 +12,7 @@ from geopy.distance import geodesic
 from .utils import get_geo, get_center_coordinates, get_zoom
 from django.contrib.auth.decorators import user_passes_test,login_required
 from notifications.models import Notification
-import cv2
+'''import cv2
 import numpy as np
 from keras.models import model_from_json
 from keras.losses import categorical_crossentropy
@@ -21,7 +21,7 @@ from keras.optimizers import Adam
 labels = ['Bite', 'Burns', 'Cuts', 'Fractures']
 
 
-
+'''
 def nearesthosps(request):
     geolocator = Nominatim(user_agent='accounts')
     if request.method == "POST":

@@ -31,3 +31,8 @@ class TreatmentForm(forms.ModelForm):
         model = Treatment
         fields = ['image']
 
+
+class TreatmentForm1(forms.ModelForm):
+    class Meta:
+        model = Treatment
+        fields = ['hospital', 'injury_type', 'injury_description']

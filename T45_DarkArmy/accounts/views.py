@@ -10,8 +10,8 @@ from geopy.geocoders import Nominatim
 from geopy.distance import geodesic
 from .utils import get_geo, get_center_coordinates, get_zoom
 from django.contrib.auth.decorators import user_passes_test
-
-'''import cv2
+from notifications.models import Notification
+import cv2
 import numpy as np
 from keras.models import model_from_json
 from keras.losses import categorical_crossentropy
@@ -19,7 +19,7 @@ from keras.optimizers import Adam
 
 labels = ['Bite', 'Burns', 'Cuts', 'Fractures']
 
-'''
+
 def nearesthosps(request):
     geolocator = Nominatim(user_agent='accounts')
     if request.method == "POST":
@@ -42,6 +42,10 @@ def nearesthosps(request):
             img = np.array(img, 'float32')
             preds = loaded_model.predict(img.reshape(-1, 300, 300, 3))
             output = labels[np.argmax(preds)]
+            
+            
+
+
 
             location_ = patient.address
             location = geolocator.geocode(location_)
@@ -63,7 +67,12 @@ def nearesthosps(request):
                 dic.append([dest, distance])
             dic.sort(key=lambda item: item[1])
             nearest = dic[0][0]
+            patient=Patient.objects.get(user=request.user)
+            doctor_list=nearest.doctor.all()
+            for doctor in doctor_list:
+                Notification.objects.create(doctor=doctor,patient=patient,treatment=instance,prediction=output) 
 
+        
             return render(request, 'accounts/suggestions.html', {'output': output,
                                                                  'hospital': nearest})
     else:

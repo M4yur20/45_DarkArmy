@@ -5,4 +5,6 @@ app_name = 'doctor'
 
 urlpatterns = [
     path('doctor/profile', views.docp,name='dprof'),
+    path('doctor/notifications',views.dnotify,name='dnotify'),
+    path('treatment/confirm',views.tconfirm,name='tconfirm'),
 ]

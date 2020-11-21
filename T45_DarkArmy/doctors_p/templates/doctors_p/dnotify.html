@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Notifications</title>
+     
+</head>
+<body>
+    {% for notification in notifications %}
+    <strong><Notification patient></strong>{{notification.patient.first_name}} {{notification.patient.last_name}}
+    <strong><Estimated Injury></strong>{{notification.prediction}} 
+    <form action='#' method='POST'>
+        {% csrf_token %}
+        <input type='hidden' name='pk' value=notification.pk></input>
+        <input type='button' value='Accept'>
+    </form> 
+    {% endfor %}  
+</body>
+</html>

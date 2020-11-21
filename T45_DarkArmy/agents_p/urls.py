@@ -4,5 +4,5 @@ from . import views
 app_name = 'agp'
 
 urlpatterns = [
-    path('',views.tp),
+    path('agent/profile/',views.agp,name='agtp'),
 ]

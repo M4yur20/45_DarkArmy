@@ -10,6 +10,7 @@ from geopy.geocoders import Nominatim
 from geopy.distance import geodesic
 from .utils import get_geo, get_center_coordinates, get_zoom
 from django.contrib.auth.decorators import user_passes_test
+<<<<<<< HEAD
 import cv2
 import numpy as np
 from keras.models import model_from_json
@@ -17,6 +18,8 @@ from keras.losses import categorical_crossentropy
 from keras.optimizers import Adam
 
 labels=['Bite','Burns','Cuts','Fractures']
+=======
+>>>>>>> 23b909c70aec81601ad6d5816f1148e728eeda63
 
 
 def nearesthosps(request):
@@ -105,8 +108,7 @@ def pprofile(request):
             instance = form.save(commit=False)
             instance.user = request.user
             instance.save()
-            print("Hello")
-            return redirect('home')
+            return redirect('pp:patprof')
     else:
         form = PatientForm()
     return render(request, 'accounts/pprofile.html', {'form': form})
@@ -119,7 +121,7 @@ def aprofile(request):
             instance = form.save(commit=False)
             instance.user = request.user
             instance.save()
-            return redirect('home')
+            return redirect('agp:agtp')
     else:
         form = AgentForm()
     return render(request, 'accounts/aprofile.html', {'form': form})
@@ -170,14 +172,6 @@ def isignup(request):
     return render(request, 'accounts/isignup.html', {"form": form})
 
 
-def dlogin(request):
-    pass
-
-
-def plogin(request):
-    pass
-
-
 def ilogin(request):
     if request.method == 'POST':
         form = AuthenticationForm(data=request.POST)
@@ -188,7 +182,7 @@ def ilogin(request):
             if 'next' in request.POST:
                 return redirect(request.POST.get('next'))
             else:
-                return redirect('home')
+                return redirect('agp:agtp')
     else:
         form = AuthenticationForm()
     return render(request, 'accounts/ilogin.html', {'form': form})
@@ -204,7 +198,7 @@ def plogin(request):
             if 'next' in request.POST:
                 return redirect(request.POST.get('next'))
             else:
-                return redirect('home')
+                return redirect('pp:patprof')
     else:
         form = AuthenticationForm()
     return render(request, 'accounts/plogin.html', {'form': form})
@@ -220,7 +214,7 @@ def dlogin(request):
             if 'next' in request.POST:
                 return redirect(request.POST.get('next'))
             else:
-                return redirect('home')
+                return redirect('doctor:dprof')
     else:
         form = AuthenticationForm()
     return render(request, 'accounts/dlogin.html', {'form': form})

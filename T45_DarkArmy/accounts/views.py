@@ -1,6 +1,7 @@
 from django.http.response import HttpResponse
 from django.shortcuts import render, redirect
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
+from tensorflow.python.keras.saving.save import load_model
 from .models import Profile, Doctor
 from django.contrib.auth.models import User
 from django.contrib.auth import login, logout
@@ -9,7 +10,13 @@ from geopy.geocoders import Nominatim
 from geopy.distance import geodesic
 from .utils import get_geo, get_center_coordinates, get_zoom
 from django.contrib.auth.decorators import user_passes_test
-import keras
+import cv2
+import numpy as np
+from keras.models import model_from_json
+from keras.losses import categorical_crossentropy
+from keras.optimizers import Adam
+
+labels=['Bite','Burns','Cuts','Fractures']
 
 
 def nearesthosps(request):
@@ -21,6 +28,19 @@ def nearesthosps(request):
             instance = form.save(commit=False)
             instance.patient = patient
             instance.save()
+            img=cv2.imread(instance.image.path)
+            json_file=open(r'C:\Users\mishr\Downloads\model3.json','r')
+            loaded_model_json=json_file.read()
+            json_file.close()
+            loaded_model=model_from_json(loaded_model_json)
+            loaded_model.load_weights(r'C:\Users\mishr\Downloads\model3.h5')
+            loaded_model.compile(loss=categorical_crossentropy,
+            optimizer=Adam(lr=0.001),
+            metrics=['accuracy'])
+            img=cv2.resize(img,(300,300),interpolation=cv2.INTER_AREA)
+            img=np.array(img,'float32')
+            preds=loaded_model.predict(img.reshape(-1,300,300,3))
+            output=labels[np.argmax(preds)]
 
             location_ = patient.address
             location = geolocator.geocode(location_)
@@ -43,9 +63,10 @@ def nearesthosps(request):
                 dic.append([dest, distance])
             dic.sort(key=lambda item:item[1])
             nearest=dic[0][0]
-            print(dic[0],dic[1])
-            print(nearest.name)
-            return redirect('home')
+        
+        
+            return render(request,'accounts/suggestions.html',{'output':output,
+            'hospital':nearest})
     else:
         form = TreatmentForm()
     return render(request, 'accounts/addimg.html', {'form': form})

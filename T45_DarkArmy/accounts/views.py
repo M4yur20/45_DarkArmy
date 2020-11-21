@@ -5,17 +5,46 @@ from .models import Profile, Doctor
 from django.contrib.auth.models import User
 from django.contrib.auth import login, logout
 from .forms import *
+from geopy.geocoders import Nominatim
+from geopy.distance import geodesic
+from .utils import get_geo, get_center_coordinates, get_zoom
+import folium
 from django.contrib.auth.decorators import user_passes_test
 
 
-def addimg(request):
+def nearesthosps(request):
+    geolocator = Nominatim(user_agent='accounts')
     if request.method == "POST":
-        form = TreatmentForm(request.POST,request.FILES)
+        form = TreatmentForm(request.POST, request.FILES)
         if form.is_valid():
             patient = Patient.objects.get(user=request.user)
             instance = form.save(commit=False)
-            instance.patient=patient
+            instance.patient = patient
             instance.save()
+
+            location_ = patient.address
+            location = geolocator.geocode(location_)
+            # location coordinates
+            l_lat = location.latitude
+            l_lon = location.longitude
+            pointA = (l_lat, l_lon)
+
+            des = Hospital.objects.all()
+            dic = []
+            for dest in des:
+
+                destination = geolocator.geocode(dest.address)
+                # destination co-ordinates
+                d_lat = destination.latitude
+                d_lon = destination.longitude
+                pointB = (d_lat, d_lon)
+                distance = round(geodesic(pointA, pointB).km, 2)
+
+                dic.append([dest, distance])
+            dic.sort(key=lambda item:item[1])
+            nearest=dic[0][0]
+            print(dic[0],dic[1])
+            print(nearest.name)
             return redirect('home')
     else:
         form = TreatmentForm()

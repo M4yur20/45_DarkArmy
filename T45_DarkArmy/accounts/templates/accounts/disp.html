@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Display</title>
+</head>
+<body>
+<div>
+    {% for key,value in dic.items %}
+    <h5><b>Distance from {{location}} to {{ key }} is </b>{{ value }}kms.</h5> <!-- Corresponding Hospital kaise kare display? -->
+    <br>
+    {% endfor %}
+</div>
+</body>
+</html>

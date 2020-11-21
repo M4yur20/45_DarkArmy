@@ -112,8 +112,7 @@ def dsignup(request):
             # user_type_signal.send(sender=user,user_type='Student')
             # log the user in
             login(request, user)
-
-            return redirect('home')
+            return redirect('accounts:dprofile')
     else:
         form = UserCreationForm()
     return render(request, 'accounts/dsignup.html', {"form": form})
@@ -128,8 +127,7 @@ def psignup(request):
             # user_type_signal.send(sender=user,user_type='Student')
             # log the user in
             login(request, user)
-
-            return redirect('home')
+            return redirect('accounts:pprofile')
     else:
         form = UserCreationForm()
     return render(request, 'accounts/psignup.html', {"form": form})
@@ -144,8 +142,7 @@ def isignup(request):
             # user_type_signal.send(sender=user,user_type='Student')
             # log the user in
             login(request, user)
-
-            return redirect('home')
+            return redirect('accounts:aprofile')
     else:
         form = UserCreationForm()
     return render(request, 'accounts/isignup.html', {"form": form})

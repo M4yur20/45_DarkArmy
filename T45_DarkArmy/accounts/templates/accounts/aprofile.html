@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Insurance Company Sign Up</title>
+    <title>Profile Completion</title>
     <style>
         body {
             line-height: 1.8;
@@ -113,7 +113,7 @@
 <body>
     <div class="container">
         <div class="signup-content">
-    <h1>Signup Page</h1>
+    <h1>Complete Your Profile</h1>
     <form class="site-form" action="/accounts/profile/agent/" method="POST">
         {% csrf_token %}
         {{form.as_p}}

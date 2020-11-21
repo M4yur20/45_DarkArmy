@@ -9,6 +9,7 @@ from geopy.geocoders import Nominatim
 from geopy.distance import geodesic
 from .utils import get_geo, get_center_coordinates, get_zoom
 from django.contrib.auth.decorators import user_passes_test
+import keras
 
 
 def nearesthosps(request):

@@ -6,7 +6,64 @@
     <title>Suggestions</title>
 </head>
 <body>
-    <h1>{{output}}</h1>
-    <h1>{{hospital.name}}</h1>
+    <h1>Nearest Hospital Info</h1>
+    <h2>{{hospital.name}}</h2>
+    
+    <p>{{hospital.address}}</p>
+    <h1>Suggestions</h1>
+    {% if 'Burns' in output %}
+    <div>
+    <span>If the burn is minor</span>
+    <p>
+        Cool the burn with cool or lukewarm running water for 20 minutes, as soon as possible after the injury. Never use ice, iced water, or any creams or greasy substances such as butter. Keep yourself or the person warm. Use a blanket or layers of clothing, but avoid putting them on the injured area.
+    </p>
+    <span>If needed visit the nearest Hospital suggested above</span>
+    </div>
+    {% elif 'Bite' in output %}
+    <div>
+    <span>Dog Bite</span>
+    <p>
+        
+        If the wound does not stop bleeding or there is pus formation or redness with swelling, and if the bitten region is warmer than the other parts of the body, you need to see a doctor ASAP. A dog bite must be treated with antibiotics or it will lead to infections.
+            
+    </p>
+    <span>Snake Bite</span>
+    <p>
+        Remove any jewelry or watches, as these could cut into the skin if swelling occurs.
+        Keep the area of the bite below the heart in order to slow the spread of venom through the bloodstream.
+        Remain still and calm. ...
+        Cover the bite with a clean, dry bandage.
+               
+    </p>
+    
+
+    <span>If needed visit the nearest Hospital suggested above</span>
+    </div>
+    {% if 'Cuts' in output %}
+    <div>
+    <span>If the cut is minor</span>
+    <p>
+        Wash your hands. This helps avoid infection.
+       Stop the bleeding. Minor cuts and scrapes usually stop bleeding on their own. ...
+Clean the wound. Rinse the wound with water. ...
+Apply an antibiotic or petroleum jelly. ...
+Cover the wound. ...
+Change the dressing. ...
+Get a tetanus shot. ...
+Watch for signs of infection.
+
+    </p>
+    <span>If needed visit the nearest Hospital suggested above</span>
+    </div>
+    {% elif 'Fractures' in output %}
+    <div>
+    <p>
+        Apply direct pressure to the source of the bleeding with gauze or a cloth to stop the bleeding. If a bone has broken through the skin, cover the wound with loosely wrapped gauze or cloth. Don't increase damage by pressing directly on the bone or pushing it back into place. Put ice on the injured joint. This can help reduce swelling by controlling internal bleeding and the buildup of fluids in and around the injured joint.
+
+    </p>
+    <span>Do visit the nearest Hospital suggested above</span>
+    </div>
+
+    {% endif %}
 </body>
 </html>

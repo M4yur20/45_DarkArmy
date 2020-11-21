@@ -1,8 +1,7 @@
 <html>
 <head>
     <title>Patient Login</title>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+      <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
         <link href="http://designify.me/code-snippets/animated-buttons/css/btns.css" rel="stylesheet">
         <link href='http://fonts.googleapis.com/css?family=Ubuntu:400,500,700' rel='stylesheet' type='text/css'>
         <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
@@ -104,10 +103,7 @@ a.animated-button.victoria-one:after {
 
     <h1 align="center"
     style="padding-top: 80px;padding-bottom: 10px;font-weight: 600;font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif; background-color:#e60000";>Patient Login</h1>
-    <div class="container-fluid" align="center"
-    style="padding-top: 150px;
-    padding-bottom: 50px;
-     background-color: #ff6666">
+    <div class="container-fluid" align="center"style="padding-top: 150px; padding-bottom: 50px;background-color: #ff6666">
     <form class="site-form" action="{% url 'accounts:plogin' %}" method="post">
         {%csrf_token%}
         <p class="text-white">{{ form.as_p }}</p>

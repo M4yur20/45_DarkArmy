@@ -10,16 +10,17 @@ from .forms import *
 from geopy.geocoders import Nominatim
 from geopy.distance import geodesic
 from .utils import get_geo, get_center_coordinates, get_zoom
-from django.contrib.auth.decorators import user_passes_test
+from django.contrib.auth.decorators import user_passes_test, login_required
 from notifications.models import Notification
-import cv2
+
+'''import cv2
 import numpy as np
 from keras.models import model_from_json
 from keras.losses import categorical_crossentropy
 from keras.optimizers import Adam
 
 labels = ['Bite', 'Burns', 'Cuts', 'Fractures']
-
+'''
 
 
 def nearesthosps(request):
@@ -44,8 +45,7 @@ def nearesthosps(request):
             img = np.array(img, 'float32')
             preds = loaded_model.predict(img.reshape(-1, 300, 300, 3))
             output = labels[np.argmax(preds)]
-            
-            
+
 
 
 
@@ -69,12 +69,11 @@ def nearesthosps(request):
                 dic.append([dest, distance])
             dic.sort(key=lambda item: item[1])
             nearest = dic[0][0]
-            patient=Patient.objects.get(user=request.user)
-            doctor_list=nearest.doctor.all()
+            patient = Patient.objects.get(user=request.user)
+            doctor_list = nearest.doctor.all()
             for doctor in doctor_list:
-                Notification.objects.create(doctor=doctor,patient=patient,treatment=instance,prediction=output) 
+                Notification.objects.create(doctor=doctor, patient=patient, treatment=instance, prediction=output)
 
-        
             return render(request, 'accounts/suggestions.html', {'output': output,
                                                                  'hospital': nearest})
     else:
@@ -223,7 +222,8 @@ def ilogin(request):
             # login the user
             user = form.get_user()
             if not user.profile.is_agent:
-                messages.error(request, f'You are not Insurance Agent,Please Try Again! or Signup as Insurance Agent First.')
+                messages.error(request,
+                               f'You are not Insurance Agent,Please Try Again! or Signup as Insurance Agent First.')
                 return redirect('accounts:ilogin')
             login(request, user)
             if 'next' in request.POST:

@@ -9,11 +9,11 @@
 <body>
     {% for notification in notifications %}
     <strong><Notification patient></strong>{{notification.patient.first_name}} {{notification.patient.last_name}}
-    <strong><Estimated Injury></strong>{{notification.prediction}} 
-    <form action='#' method='POST'>
+    <strong><Estimated Injury></strong>{{notification.prediction}}
+    <form action="{% url 'doctor:tconfirm'%}" method='POST'>
         {% csrf_token %}
-        <input type='hidden' name='pk' value=notification.pk></input>
-        <input type='button' value='Accept'>
+        <input type='hidden' name='pk' value={{notification.id}}>
+        <input type='submit' value='Accept'>
     </form> 
     {% endfor %}  
 </body>

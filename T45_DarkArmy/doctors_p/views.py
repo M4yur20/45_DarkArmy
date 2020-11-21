@@ -7,5 +7,5 @@ from django.http import HttpResponse
 
 # Create your views here.
 
-def tp(request):
-    return HttpResponse("Done")
+def docp(request):
+    return HttpResponse('Hello')

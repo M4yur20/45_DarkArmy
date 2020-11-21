@@ -70,7 +70,7 @@ def dprofile(request):
             instance = form.save(commit=False)
             instance.user = request.user
             instance.save()
-            return redirect('home')
+            return redirect('doctor:dprof')
     else:
         form = DoctorForm()
     return render(request, 'accounts/dprofile.html', {'form': form})

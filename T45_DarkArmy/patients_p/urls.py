@@ -4,5 +4,5 @@ from . import views
 app_name = 'pp'
 
 urlpatterns = [
-    path('<int:>',views.tp,name=),
+    path('patient/profile/',views.patprof,name='patprof'),
 ]

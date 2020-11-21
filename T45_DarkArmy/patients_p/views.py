@@ -4,5 +4,6 @@ from django.http import HttpResponse
 
 # Create your views here.
 
-def tp(request):
-    return HttpResponse("Done")
+def patprof(request):
+
+    return render(request,'patient_p/patientp.html')

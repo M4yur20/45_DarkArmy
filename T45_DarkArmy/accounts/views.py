@@ -10,16 +10,29 @@ from .forms import *
 from geopy.geocoders import Nominatim
 from geopy.distance import geodesic
 from .utils import get_geo, get_center_coordinates, get_zoom
+<<<<<<< Updated upstream
 from django.contrib.auth.decorators import user_passes_test,login_required
 from notifications.models import Notification
 '''import cv2
+=======
+from django.contrib.auth.decorators import user_passes_test
+
+'''
+import cv2
+>>>>>>> Stashed changes
 import numpy as np
 from keras.models import model_from_json
 from keras.losses import categorical_crossentropy
 from keras.optimizers import Adam
 
+<<<<<<< Updated upstream
 labels = ['Bite', 'Burns', 'Cuts', 'Fractures']
 
+=======
+labels=['Bite','Burns','Cuts','Fractures']
+
+'''
+>>>>>>> Stashed changes
 
 '''
 def nearesthosps(request):
@@ -81,6 +94,7 @@ def nearesthosps(request):
         form = TreatmentForm()
     return render(request, 'accounts/addimg.html', {'form': form})
 
+<<<<<<< Updated upstream
 
 def check_patient(user):
     return user.profile.is_patient
@@ -94,6 +108,8 @@ def check_doctor(user):
     return user.profile.is_doctor
 
 
+=======
+>>>>>>> Stashed changes
 def logout_view(request):
     if request.method == 'POST':
         logout(request)

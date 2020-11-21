@@ -16,6 +16,7 @@ urlpatterns=[
     path('profile/agent/',views.aprofile,name='aprofile'),
     path('hospital/register/',views.hosp_reg,name='hreg'),
     path('nearesthosps/',views.nearesthosps,name='nhosps'),
+    path('checkuser/', views.checkuser,name='checkuser'),
     path('logout/', views.logout_view, name='logout'),
     path('temp/',views.tp,name='tp'),
 

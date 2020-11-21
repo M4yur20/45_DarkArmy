@@ -9,7 +9,7 @@ from .forms import *
 from geopy.geocoders import Nominatim
 from geopy.distance import geodesic
 from .utils import get_geo, get_center_coordinates, get_zoom
-from django.contrib.auth.decorators import user_passes_test
+from django.contrib.auth.decorators import user_passes_test, login_required
 
 '''import cv2
 import numpy as np
@@ -20,6 +20,8 @@ from keras.optimizers import Adam
 labels = ['Bite', 'Burns', 'Cuts', 'Fractures']
 
 '''
+
+
 def nearesthosps(request):
     geolocator = Nominatim(user_agent='accounts')
     if request.method == "POST":
@@ -71,12 +73,26 @@ def nearesthosps(request):
     return render(request, 'accounts/addimg.html', {'form': form})
 
 
+def check_patient(user):
+    return user.profile.is_patient
+
+
+def check_iagent(user):
+    return user.profile.is_agent
+
+
+def check_doctor(user):
+    return user.profile.is_doctor
+
+
 def logout_view(request):
     if request.method == 'POST':
         logout(request)
         return redirect('home')
 
 
+@login_required(login_url='accounts:dlogin')
+@user_passes_test(check_doctor, login_url='accounts:dlogin')
 def hosp_reg(request):
     if request.method == "POST":
         form = HospitalForm(request.POST)
@@ -84,12 +100,25 @@ def hosp_reg(request):
             doctor = Doctor.objects.get(user=request.user)
             instance = form.save()
             instance.doctor.add(doctor)
-            return redirect('home')
+            return redirect('doctor:dprof')
     else:
         form = HospitalForm()
     return render(request, 'accounts/hospreg.html', {'form': form})
 
 
+def checkuser(request):
+    if request.method == 'POST':
+        profile = Profile.objects.get(user=request.user)
+        if profile.is_agent:
+            return redirect('agp:agtp')
+        elif profile.is_doctor:
+            return redirect('doctor:dprof')
+        else:
+            return redirect('pp:patprof')
+
+
+@login_required(login_url='accounts:dlogin')
+@user_passes_test(check_doctor, login_url='accounts:dlogin')
 def dprofile(request):
     if request.method == "POST":
         form = DoctorForm(request.POST)
@@ -103,6 +132,8 @@ def dprofile(request):
     return render(request, 'accounts/dprofile.html', {'form': form})
 
 
+@login_required(login_url='accounts:plogin')
+@user_passes_test(check_doctor, login_url='accounts:plogin')
 def pprofile(request):
     if request.method == "POST":
         form = PatientForm(request.POST)
@@ -116,6 +147,8 @@ def pprofile(request):
     return render(request, 'accounts/pprofile.html', {'form': form})
 
 
+@login_required(login_url='accounts:ilogin')
+@user_passes_test(check_doctor, login_url='accounts:ilogin')
 def aprofile(request):
     if request.method == "POST":
         form = AgentForm(request.POST)
@@ -222,18 +255,6 @@ def dlogin(request):
     return render(request, 'accounts/dlogin.html', {'form': form})
 
 
-def check_patient(user):
-    return user.profile.is_patient
-
-
-def check_iagent(user):
-    return user.profile.is_agent
-
-
-def check_doctor(user):
-    return user.profile.is_doctor
-
-
-@user_passes_test(check_doctor, login_url='home')
+'''@user_passes_test(check_doctor, login_url='home')
 def tp(request):
-    return HttpResponse("I am a Doctor")
+    return HttpResponse("I am a Doctor")'''

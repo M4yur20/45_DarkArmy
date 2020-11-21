@@ -7,6 +7,9 @@
 <body>
 <h3 align="center"><u>Your Profile</u></h3>
     <div>
+        {% if user.is_authenticated %}
+        <form class="logout" action="{% url 'accounts:logout'%}" method="POST">
+            {% csrf_token %}
            Your First Name : {{doctor.first_name}}<br>
            Your Last Name : {{doctor.last_name}}<br>
            Your Contact Number : {{doctor.contact_no}}
@@ -19,7 +22,10 @@
         Injury Type : {{treat.injury_type}}<br>
         Injury Description : {{treat.injury_description}}<br>
         <hr>
-{%endfor%}
+        {%endfor%}
+        <button style="border: none;" type="submit"> Logout</button><!-- iska placement thek kar -->
+        {% endif %}
+        </form>
     </div>
 </body>
 </html>

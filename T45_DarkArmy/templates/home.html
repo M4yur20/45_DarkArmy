@@ -24,13 +24,13 @@
                 <a href="#" class="w3-button w3-block">Home</a>
               </div>
               <div class="w3-col s4">
-                <button class="w3-button w3-block" type="submit"> Signup for User</button>
+                <a href="{% url 'accounts:plogin' %}" class="w3-button w3-block" > Login for Patient</a>
             </div>
             <div class="w3-col s4">
-                <button class="w3-button w3-block" type="submit"> Signup for Doctors</button>
+                <a href="{% url 'accounts:dlogin' %}" class="w3-button w3-block" > Login for Doctors</a>
             </div>
             <div class="w3-col s4">
-                <button class="w3-button w3-block" type="submit"> Signup for Agents</button>
+                <a href="{% url 'accounts:ilogin' %}" class="w3-button w3-block" > Login for Insurance Agents</a>
             </div>
         </div>
     </div>
@@ -82,9 +82,21 @@
             <div  >
             <div class="w3-col l12 m6 w3-grey w3-container w3-padding-16"  >
                 <h3>Hospitals that support us</h3>
+                <div>
+                    {% for i in loh %}
+                    <strong> {{i.name}} </strong>
+                    <br>
+                    {% endfor %}
+                </div>
             </div>
             <div class="w3-col l12 m6 w3-grey w3-container w3-padding-16"  >
                 <h3>Insurance Companies that support us</h3>
+                <div>
+                    {% for j in loa %}
+                    <strong> {{j.first_name}} {{j.last_name}} </strong>
+                    <br>
+                    {% endfor %}
+                </div>
             </div>
         </div>
 </body>

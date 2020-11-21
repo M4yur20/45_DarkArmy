@@ -1,3 +1,4 @@
+from django.contrib import messages
 from django.http.response import HttpResponse
 from django.shortcuts import render, redirect
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
@@ -18,6 +19,7 @@ from keras.losses import categorical_crossentropy
 from keras.optimizers import Adam
 
 labels = ['Bite', 'Burns', 'Cuts', 'Fractures']
+
 
 
 def nearesthosps(request):
@@ -80,12 +82,26 @@ def nearesthosps(request):
     return render(request, 'accounts/addimg.html', {'form': form})
 
 
+def check_patient(user):
+    return user.profile.is_patient
+
+
+def check_iagent(user):
+    return user.profile.is_agent
+
+
+def check_doctor(user):
+    return user.profile.is_doctor
+
+
 def logout_view(request):
     if request.method == 'POST':
         logout(request)
         return redirect('home')
 
 
+@login_required(login_url='accounts:dlogin')
+@user_passes_test(check_doctor, login_url='accounts:dlogin')
 def hosp_reg(request):
     if request.method == "POST":
         form = HospitalForm(request.POST)
@@ -93,12 +109,25 @@ def hosp_reg(request):
             doctor = Doctor.objects.get(user=request.user)
             instance = form.save()
             instance.doctor.add(doctor)
-            return redirect('home')
+            return redirect('doctor:dprof')
     else:
         form = HospitalForm()
     return render(request, 'accounts/hospreg.html', {'form': form})
 
 
+def checkuser(request):
+    if request.method == 'POST':
+        profile = Profile.objects.get(user=request.user)
+        if profile.is_agent:
+            return redirect('agp:agtp')
+        elif profile.is_doctor:
+            return redirect('doctor:dprof')
+        else:
+            return redirect('pp:patprof')
+
+
+@login_required(login_url='accounts:dlogin')
+@user_passes_test(check_doctor, login_url='accounts:dlogin')
 def dprofile(request):
     if request.method == "POST":
         form = DoctorForm(request.POST)
@@ -112,6 +141,8 @@ def dprofile(request):
     return render(request, 'accounts/dprofile.html', {'form': form})
 
 
+@login_required(login_url='accounts:plogin')
+@user_passes_test(check_patient, login_url='accounts:plogin')
 def pprofile(request):
     if request.method == "POST":
         form = PatientForm(request.POST)
@@ -125,6 +156,8 @@ def pprofile(request):
     return render(request, 'accounts/pprofile.html', {'form': form})
 
 
+@login_required(login_url='accounts:ilogin')
+@user_passes_test(check_iagent, login_url='accounts:ilogin')
 def aprofile(request):
     if request.method == "POST":
         form = AgentForm(request.POST)
@@ -189,6 +222,9 @@ def ilogin(request):
         if form.is_valid():
             # login the user
             user = form.get_user()
+            if not user.profile.is_agent:
+                messages.error(request, f'You are not Insurance Agent,Please Try Again! or Signup as Insurance Agent First.')
+                return redirect('accounts:ilogin')
             login(request, user)
             if 'next' in request.POST:
                 return redirect(request.POST.get('next'))
@@ -205,6 +241,9 @@ def plogin(request):
         if form.is_valid():
             # login the user
             user = form.get_user()
+            if not user.profile.is_patient:
+                messages.error(request, f'You are not Patient,Please Try Again! or Signup as Patient First.')
+                return redirect('accounts:plogin')
             login(request, user)
             if 'next' in request.POST:
                 return redirect(request.POST.get('next'))
@@ -221,6 +260,9 @@ def dlogin(request):
         if form.is_valid():
             # login the user
             user = form.get_user()
+            if not user.profile.is_doctor:
+                messages.error(request, f'You are not Doctor,Please Try Again! or Signup as Doctor First')
+                return redirect('accounts:dlogin')
             login(request, user)
             if 'next' in request.POST:
                 return redirect(request.POST.get('next'))
@@ -231,18 +273,6 @@ def dlogin(request):
     return render(request, 'accounts/dlogin.html', {'form': form})
 
 
-def check_patient(user):
-    return user.profile.is_patient
-
-
-def check_iagent(user):
-    return user.profile.is_agent
-
-
-def check_doctor(user):
-    return user.profile.is_doctor
-
-
-@user_passes_test(check_doctor, login_url='home')
+'''@user_passes_test(check_doctor, login_url='home')
 def tp(request):
-    return HttpResponse("I am a Doctor")
+    return HttpResponse("I am a Doctor")'''

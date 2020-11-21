@@ -1,3 +1,4 @@
+from django.contrib import messages
 from django.http.response import HttpResponse
 from django.shortcuts import render, redirect
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
@@ -133,7 +134,7 @@ def dprofile(request):
 
 
 @login_required(login_url='accounts:plogin')
-@user_passes_test(check_doctor, login_url='accounts:plogin')
+@user_passes_test(check_patient, login_url='accounts:plogin')
 def pprofile(request):
     if request.method == "POST":
         form = PatientForm(request.POST)
@@ -148,7 +149,7 @@ def pprofile(request):
 
 
 @login_required(login_url='accounts:ilogin')
-@user_passes_test(check_doctor, login_url='accounts:ilogin')
+@user_passes_test(check_iagent, login_url='accounts:ilogin')
 def aprofile(request):
     if request.method == "POST":
         form = AgentForm(request.POST)
@@ -213,6 +214,9 @@ def ilogin(request):
         if form.is_valid():
             # login the user
             user = form.get_user()
+            if not user.profile.is_agent:
+                messages.error(request, f'You are not Insurance Agent,Please Try Again! or Signup as Insurance Agent First.')
+                return redirect('accounts:ilogin')
             login(request, user)
             if 'next' in request.POST:
                 return redirect(request.POST.get('next'))
@@ -229,6 +233,9 @@ def plogin(request):
         if form.is_valid():
             # login the user
             user = form.get_user()
+            if not user.profile.is_patient:
+                messages.error(request, f'You are not Patient,Please Try Again! or Signup as Patient First.')
+                return redirect('accounts:plogin')
             login(request, user)
             if 'next' in request.POST:
                 return redirect(request.POST.get('next'))
@@ -245,6 +252,9 @@ def dlogin(request):
         if form.is_valid():
             # login the user
             user = form.get_user()
+            if not user.profile.is_doctor:
+                messages.error(request, f'You are not Doctor,Please Try Again! or Signup as Doctor First')
+                return redirect('accounts:dlogin')
             login(request, user)
             if 'next' in request.POST:
                 return redirect(request.POST.get('next'))

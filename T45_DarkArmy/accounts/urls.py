@@ -18,6 +18,5 @@ urlpatterns=[
     path('nearesthosps/',views.nearesthosps,name='nhosps'),
     path('checkuser/', views.checkuser,name='checkuser'),
     path('logout/', views.logout_view, name='logout'),
-    path('temp/',views.tp,name='tp'),
 
 ]

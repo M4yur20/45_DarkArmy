@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Doctor Profile</title>
+</head>
+<body>
+<h3 align="center"><u>Your Profile</u></h3>
+    <div>
+           Your First Name : {{doctor.first_name}}<br>
+           Your Last Name : {{doctor.last_name}}<br>
+           Your Contact Number : {{doctor.contact_no}}
+        <br><hr><hr>
+        <h3 align="center"><u>Your Treatments</u></h3>
+        {% for treat in treatments %}
+        Patient RFID : {{treat.patient.uid}}<br>
+        Patient Name : {{treat.patient}}<br>
+        Hospital Treated In : {{treat.hospital}}<br>
+        Injury Type : {{treat.injury_type}}<br>
+        Injury Description : {{treat.injury_description}}<br>
+        <hr>
+{%endfor%}
+    </div>
+</body>
+</html>

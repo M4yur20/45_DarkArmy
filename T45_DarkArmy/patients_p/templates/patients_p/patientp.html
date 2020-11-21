@@ -5,6 +5,21 @@
     <title>Patient Profile</title>
 </head>
 <body>
+    <h3 align="center"><u>Your Profile</u></h3>
+    First Name : {{patient.first_name}}<br>
+    Last Name : {{patient.last_name}}<br>
+    Email : {{patient.email_id}}<br>
+    Contact Number : {{patient.contact_no}}<br>
+    RFID : {{patient.uid}}
 
+    <hr><hr>
+    <h3 align="center"><u>Your Treatment History</u></h3>
+    {% for treat in mytreats %}
+    Your Doctor : {{treat.doctor}}<br>
+    Hospital : {{treat.hospital}}<br>
+    Injury Type : {{treat.injury_type}}<br>
+    Injury Description : {{treat.injury_description}}
+    <br><hr>
+{%endfor%}
 </body>
 </html>

@@ -4,5 +4,5 @@ from . import views
 app_name = 'docp'
 
 urlpatterns = [
-    path('', admin.site.urls),
+    path('', views.tp),
 ]

@@ -4,5 +4,5 @@ from . import views
 app_name = 'pp'
 
 urlpatterns = [
-    path('', admin.site.urls),
+    path('<int:>',views.tp,name=),
 ]

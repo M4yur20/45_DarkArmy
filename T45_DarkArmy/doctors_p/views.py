@@ -21,7 +21,8 @@ def dnotify(request):
 
 
 def tconfirm(request):
-    pk=request.POST.get(pk)
+    pk=request.POST.get('pk')
+    print(pk)
     notification=Notification.objects.get(pk=pk)
     treatment=notification.treatment
     doctor=Doctor.objects.get(user=request.user)

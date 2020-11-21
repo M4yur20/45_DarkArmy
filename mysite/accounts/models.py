@@ -1,3 +1,5 @@
+import uuid
+
 from django.db import models
 from django.contrib.auth.models import User
 
@@ -8,9 +10,6 @@ class Profile(models.Model):
     is_patient = models.BooleanField(default=False)
     is_doctor = models.BooleanField(default=False)
     is_agent = models.BooleanField(default=False)
-
-    def __str__(self):
-        return self.user
 
 
 class Doctor(models.Model):
@@ -30,6 +29,9 @@ class Patient(models.Model):
     last_name = models.CharField(max_length=30)
     contact_no = models.CharField(max_length=10)
     email_id = models.EmailField()
+    uid = models.UUIDField(unique=True,default=uuid.uuid4,editable=False)
+    emergency_contact = models.CharField(max_length=10)
+    address = models.CharField(max_length=200)
 
     def __str__(self):
         return self.first_name + self.last_name
@@ -49,4 +51,8 @@ class Agent(models.Model):
 class Hospital(models.Model):
     doctor = models.ManyToManyField(Doctor)
     name = models.CharField(max_length=100)
-    
+    contact = models.CharField(max_length=10)
+    address = models.CharField(max_length=200)
+
+    def __str__(self):
+        return self.name

@@ -5,7 +5,10 @@
     <title>Patient Profile</title>
 </head>
 <body>
-    <h3 align="center"><u>Your Profile</u></h3>
+    {% if user.is_authenticated %}
+    <form class="logout" action="{% url 'accounts:logout'%}" method="POST">
+        {% csrf_token %}
+    <h3 align="center"><u>Your Profile</u></h3> <h3 align="right"><a href="{% url 'accounts:nhosps' %}"> Add Your Injury</a></h3>
     First Name : {{patient.first_name}}<br>
     Last Name : {{patient.last_name}}<br>
     Email : {{patient.email_id}}<br>
@@ -20,6 +23,9 @@
     Injury Type : {{treat.injury_type}}<br>
     Injury Description : {{treat.injury_description}}
     <br><hr>
-{%endfor%}
+    {%endfor%}
+    <button style="border: none;" type="submit"> Logout</button><!-- iska placement thek kar -->
+    {% endif %}
+    </form>
 </body>
 </html>

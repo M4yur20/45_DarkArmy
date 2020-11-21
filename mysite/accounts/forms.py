@@ -18,3 +18,6 @@ class AgentForm(forms.ModelForm):
     class Meta:
         model = Agent
         fields = ['first_name', 'last_name', 'contact_no', 'email_id']
+
+
+

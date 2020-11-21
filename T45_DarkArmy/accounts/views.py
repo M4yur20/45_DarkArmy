@@ -28,9 +28,13 @@ from keras.optimizers import Adam
 <<<<<<< Updated upstream
 labels = ['Bite', 'Burns', 'Cuts', 'Fractures']
 
+<<<<<<< Updated upstream
 =======
 labels=['Bite','Burns','Cuts','Fractures']
 
+'''
+>>>>>>> Stashed changes
+=======
 '''
 >>>>>>> Stashed changes
 
@@ -95,6 +99,7 @@ def nearesthosps(request):
     return render(request, 'accounts/addimg.html', {'form': form})
 
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
 
 def check_patient(user):
     return user.profile.is_patient
@@ -108,6 +113,8 @@ def check_doctor(user):
     return user.profile.is_doctor
 
 
+=======
+>>>>>>> Stashed changes
 =======
 >>>>>>> Stashed changes
 def logout_view(request):

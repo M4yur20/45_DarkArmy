@@ -1,3 +1,4 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -9,13 +10,13 @@
             line-height: 1.8;
             color: #222;
             font-family: 'Montserrat';
-            background: url('https://wallpapershome.com/images/wallpapers/lake-1280x720-4k-hd-wallpaper-sea-pink-sunset-sunrise-reflection-sky-864.jpg');
+            background: url('{% static 'bg4.jpg' %}');
             background-repeat: no-repeat;
             background-position: center;
             background-size: cover;
     }
     .container {
-        padding-top: 50px;
+        padding-top: 100px;
         width: 660px;
         position: relative;
         margin: 0 auto;

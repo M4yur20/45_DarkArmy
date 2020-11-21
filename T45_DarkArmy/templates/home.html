@@ -15,7 +15,7 @@ body{
 section{
     position: relative;
     width: 100%;
-    height: 120vh;
+    height: 110vh;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -44,8 +44,17 @@ section:after{
     position: absolute;
     top: 0;
     right: 0;
-    width: 50%;
-    height: 50%;
+    width: 55%;
+    height: 55%;
+    object-fit: cover;
+    pointer-events: none;
+}
+#car2{
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 45%;
+    height: 45%;
     object-fit: cover;
     pointer-events: none;
 }
@@ -55,15 +64,6 @@ section:after{
     left:500px;
     width: 20%;
     height: 20%;
-    object-fit: cover;
-    pointer-events: none;
-}
-#car2{
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    width: 50%;
-    height: 50%;
     object-fit: cover;
     pointer-events: none;
 }
@@ -79,21 +79,21 @@ section:after{
 <body>
     <section>
         <img src="{% static 'car1.png' %}" id="car1">
-        <img src="{% static 'col.png' %}" id="col">
         <img src="{% static 'car2.jpg' %}" id="car2">
+        <img src="{% static 'col.png' %}" id="col">
         <h2 id="text">Highway Protocol</h2>
         <script type="text/javascript">
                 let car1=document.getElementById("car1");
-                let col=document.getElementById("col");
                 let car2=document.getElementById("car2");
+                let col=document.getElementById("col");
                 let text=document.getElementById("text");
 
                 window.addEventListener('scroll',function(){
                     var value=window.scrollY;
                     car1.style.top=value * 0.5 + 'px';
-                    col.style.bottom=value * 2 + 'px';
                     car2.style.bottom=value * 0.3 + 'px';
-                    text.style.bottom=value * 0.5 + 'px';
+                    col.style.bottom=value * 2 + 'px';
+                    text.style.bottom=value * 0.25 + 'px';
                 })
         </script>
     </section>

@@ -8,6 +8,20 @@ from .forms import *
 from django.contrib.auth.decorators import user_passes_test
 
 
+def addimg(request):
+    if request.method == "POST":
+        form = TreatmentForm(request.POST,request.FILES)
+        if form.is_valid():
+            patient = Patient.objects.get(user=request.user)
+            instance = form.save(commit=False)
+            instance.patient=patient
+            instance.save()
+            return redirect('home')
+    else:
+        form = TreatmentForm()
+    return render(request, 'accounts/addimg.html', {'form': form})
+
+
 def hosp_reg(request):
     if request.method == "POST":
         form = HospitalForm(request.POST)

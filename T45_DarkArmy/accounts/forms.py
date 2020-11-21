@@ -11,7 +11,7 @@ class DoctorForm(forms.ModelForm):
 class PatientForm(forms.ModelForm):
     class Meta:
         model = Patient
-        fields = ['first_name', 'last_name', 'contact_no', 'email_id', 'emergency_contact_no' , 'address']
+        fields = ['first_name', 'last_name', 'contact_no', 'email_id', 'emergency_contact_no', 'address']
 
 
 class AgentForm(forms.ModelForm):
@@ -23,7 +23,11 @@ class AgentForm(forms.ModelForm):
 class HospitalForm(forms.ModelForm):
     class Meta:
         model = Hospital
-        fields = ['name','contact','address']
+        fields = ['name', 'contact', 'address']
 
 
+class TreatmentForm(forms.ModelForm):
+    class Meta:
+        model = Treatment
+        fields = ['image']
 

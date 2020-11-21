@@ -29,7 +29,7 @@ class Patient(models.Model):
     last_name = models.CharField(max_length=30)
     contact_no = models.CharField(max_length=10)
     email_id = models.EmailField()
-    uid = models.UUIDField(unique=True,default=uuid.uuid4,editable=False)
+    uid = models.UUIDField(unique=True, default=uuid.uuid4)
     emergency_contact_no = models.CharField(max_length=10)
     address = models.CharField(max_length=200)
 
@@ -56,3 +56,12 @@ class Hospital(models.Model):
 
     def __str__(self):
         return self.name
+
+
+class Treatment(models.Model):
+    image = models.ImageField()
+    doctor = models.ForeignKey(Doctor, on_delete=models.CASCADE, blank=True,null=True)
+    patient = models.ForeignKey(Patient, on_delete=models.CASCADE, blank=True,null=True)
+    hospital = models.ForeignKey(Hospital, on_delete=models.CASCADE, blank=True,null=True)
+    injury_type = models.CharField(max_length=20,blank=True)
+    injury_description = models.CharField(max_length=200,blank=True)

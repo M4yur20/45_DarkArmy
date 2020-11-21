@@ -15,6 +15,7 @@ urlpatterns=[
     path('profile/patient/',views.pprofile,name='pprofile'),
     path('profile/agent/',views.aprofile,name='aprofile'),
     path('hospital/register/',views.hosp_reg,name='hreg'),
+    path('addimage/',views.addimg,name='addimg'),
     path('temp/',views.tp,name='tp'),
 
 ]

@@ -7,5 +7,5 @@ urlpatterns = [
     path('doctor/profile', views.docp,name='dprof'),
     path('doctor/notifications',views.dnotify,name='dnotify'),
     path('treatment/confirm',views.tconfirm,name='tconfirm'),
-    path('treatment/update',views.tupdate,name='tupdate')
+    path('treatment/<int:id>/',views.tupdate,name='tupdate')
 ]

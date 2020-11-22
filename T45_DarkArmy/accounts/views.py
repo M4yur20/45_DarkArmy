@@ -10,9 +10,10 @@ from .forms import *
 from geopy.geocoders import Nominatim
 from geopy.distance import geodesic
 from .utils import get_geo, get_center_coordinates, get_zoom
-from django.contrib.auth.decorators import user_passes_test,login_required
+from django.contrib.auth.decorators import user_passes_test, login_required
 from notifications.models import Notification
-'''import cv2
+import cv2
+
 import numpy as np
 from keras.models import model_from_json
 from keras.losses import categorical_crossentropy
@@ -21,7 +22,6 @@ from keras.optimizers import Adam
 labels = ['Bite', 'Burns', 'Cuts', 'Fractures']
 
 
-'''
 def nearesthosps(request):
     geolocator = Nominatim(user_agent='accounts')
     if request.method == "POST":
@@ -32,11 +32,11 @@ def nearesthosps(request):
             instance.patient = patient
             instance.save()
             img = cv2.imread(instance.image.path)
-            json_file = open(r'C:\Users\mishr\Downloads\model3.json', 'r')
+            json_file = open('/Users/mayuragarwal/Desktop/model3.json', 'r')
             loaded_model_json = json_file.read()
             json_file.close()
             loaded_model = model_from_json(loaded_model_json)
-            loaded_model.load_weights(r'C:\Users\mishr\Downloads\model3.h5')
+            loaded_model.load_weights('/Users/mayuragarwal/Desktop/model3.h5')
             loaded_model.compile(loss=categorical_crossentropy,
                                  optimizer=Adam(lr=0.001),
                                  metrics=['accuracy'])
@@ -44,10 +44,6 @@ def nearesthosps(request):
             img = np.array(img, 'float32')
             preds = loaded_model.predict(img.reshape(-1, 300, 300, 3))
             output = labels[np.argmax(preds)]
-            
-            
-
-
 
             location_ = patient.address
             location = geolocator.geocode(location_)
@@ -69,12 +65,11 @@ def nearesthosps(request):
                 dic.append([dest, distance])
             dic.sort(key=lambda item: item[1])
             nearest = dic[0][0]
-            patient=Patient.objects.get(user=request.user)
-            doctor_list=nearest.doctor.all()
+            patient = Patient.objects.get(user=request.user)
+            doctor_list = nearest.doctor.all()
             for doctor in doctor_list:
-                Notification.objects.create(doctor=doctor,patient=patient,treatment=instance,prediction=output) 
+                Notification.objects.create(doctor=doctor, patient=patient, treatment=instance, prediction=output)
 
-        
             return render(request, 'accounts/suggestions.html', {'output': output,
                                                                  'hospital': nearest})
     else:
@@ -223,7 +218,8 @@ def ilogin(request):
             # login the user
             user = form.get_user()
             if not user.profile.is_agent:
-                messages.error(request, f'You are not Insurance Agent,Please Try Again! or Signup as Insurance Agent First.')
+                messages.error(request,
+                               f'You are not Insurance Agent,Please Try Again! or Signup as Insurance Agent First.')
                 return redirect('accounts:ilogin')
             login(request, user)
             if 'next' in request.POST:

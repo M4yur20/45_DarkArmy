@@ -3,6 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <title>Doctor Profile</title>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+        <link href="http://designify.me/code-snippets/animated-buttons/css/btns.css" rel="stylesheet">
+        <link href='http://fonts.googleapis.com/css?family=Ubuntu:400,500,700' rel='stylesheet' type='text/css'>
+        <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
 </head>
 <style>
     body{
@@ -19,6 +23,37 @@
         padding: 50px 85px; 
         opacity: 0.9;
     }
+    a.animated-button.thar-two {
+	color: #fff;
+	cursor: pointer;
+	display: block;
+	position: relative;
+	border: 2px solid #F7CA18;
+	transition: all 0.4s cubic-bezier(0.215, 0.61, 0.355, 1) 0s;
+}
+a.animated-button.thar-two:hover {
+	color: #000 !important;
+	background-color: transparent;
+	text-shadow: ntwo;
+}
+a.animated-button.thar-two:hover:before {
+	top: 0%;
+	bottom: auto;
+	height: 100%;
+}
+a.animated-button.thar-two:before {
+	display: block;
+	position: absolute;
+	left: 0px;
+	bottom: 0px;
+	height: 0px;
+	width: 100%;
+	z-index: -1;
+	content: '';
+	color: #000 !important;
+	background: #F7CA18;
+	transition: all 0.4s cubic-bezier(0.215, 0.61, 0.355, 1) 0s;
+}
     .bubbly-button {
 	font-family: 'Helvetica', 'Arial', sans-serif;
 	display: inline-block;
@@ -102,16 +137,88 @@
 	  background-size: 0% 0%, 0% 0%,  0% 0%,  0% 0%,  0% 0%,  0% 0%;
 	}
   }
+  a.animated-button.thar-three {
+	color: #fff;
+	cursor: pointer;
+	display: block;
+	position: relative;
+	border: 2px solid #F7CA18;
+	transition: all 0.4s cubic-bezier(0.42, 0, 0.58, 1);
+}
+a.animated-button.thar-three:hover {
+	color: #000 !important;
+	background-color: transparent;
+	text-shadow: nthree;
+}
+a.animated-button.thar-three:hover:before {
+	left: 0%;
+	right: auto;
+	width: 100%;
+}
+a.animated-button.thar-three:before {
+	display: block;
+	position: absolute;
+	top: 0px;
+	right: 0px;
+	height: 100%;
+	width: 0px;
+	z-index: -1;
+	content: '';
+	color: #000 !important;
+	background: #F7CA18;
+	transition: all 0.4s cubic-bezier(0.42, 0, 0.58, 1);
+}
+a.animated-button.thar-one {
+	color: #fff;
+	cursor: pointer;
+	display: block;
+	position: relative;
+	border: 2px solid #F7CA18;
+	transition: all 0.4s cubic-bezier(0.215, 0.61, 0.355, 1) 0s;
+}
+a.animated-button.thar-one:hover {
+	color: #000 !important;
+	background-color: transparent;
+	text-shadow: none;
+}
+a.animated-button.thar-one:hover:before {
+	bottom: 0%;
+	top: auto;
+	height: 100%;
+}
+a.animated-button.thar-one:before {
+	display: block;
+	position: absolute;
+	left: 0px;
+	top: 0px;
+	height: 0px;
+	width: 100%;
+	z-index: -1;
+	content: '';
+	color: #000 !important;
+	background: #F7CA18;
+	transition: all 0.4s cubic-bezier(0.215, 0.61, 0.355, 1) 0s;
+}
+a.animated-button.victoria-two {
+	border: 2px solid #D24D57;
+  color: #000;
+}
+a.animated-button.victoria-two:after {
+	background: #D24D57;
+	-moz-transform: translateX(-50%) translateY(-50%) rotate(25deg);
+	-ms-transform: translateX(-50%) translateY(-50%) rotate(25deg);
+	-webkit-transform: translateX(-50%) translateY(-50%) rotate(25deg);
+	transform: translateX(-50%) translateY(-50%) rotate(25deg);
+}
 </style>
 <body>
 {% if user.is_authenticated %}
-
-                <h2 style="text-color:white;" align="right"><a href="{% url 'accounts:hreg'%}">Register a Hospital</a></h2>
-
+<div class="col-md-3 col-sm-3 col-xs-6"> <a href="#" class="btn btn-sm animated-button thar-one">Go To Homepage</a> </div>
+<div class="col-md-3 col-sm-3 col-xs-6"><a href="{% url 'accounts:hreg'%}" class="btn btn-sm animated-button thar-two">Register a Hospital</a></div>
+<div class="col-md-3 col-sm-3 col-xs-6"><a href="{% url 'doctor:dnotify'%}"class="btn btn-sm animated-button thar-three"> Your Notifications</a></div><br><br><br><br>
 <h1> Your Profile</h1>
-<h3><a href="{% url 'doctor:dnotify'%}"> Your Notifications</a></h3>
         <form class="logout" action="{% url 'accounts:logout'%}" method="POST">
-            {% csrf_token %}
+          {% csrf_token %}
            Your First Name : {{doctor.first_name}}<br>
            Your Last Name : {{doctor.last_name}}<br>
            Your Contact Number : {{doctor.contact_no}}<br>
@@ -119,10 +226,7 @@
         <div class="container">
         <h2 align="center">Your Treatments</h2>
         {% for treat in treatments %}
-            <form action="{% url 'doctor:tupdate'%}" method="post">
-                <input type="hidden" name="id" value={{treat.id}}>
-                <input type="submit" value="Update">
-            </form>
+            <div class="col-md-3 col-sm-3 col-xs-6"><a class="btn btn-sm animated-button victoria-two" href="{% url 'doctor:tupdate' id=treat.id %}">Update</a></div>
         Patient RFID : {{treat.patient.uid}}<br>
         Patient Name : {{treat.patient}}<br>
         Hospital Treated In : {{treat.hospital}}<br>
@@ -153,5 +257,7 @@
             bubblyButtons[i].addEventListener('click', animateButton, false);
             }
           </script>
+          <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script> 
+          <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
 </body>
 </html>

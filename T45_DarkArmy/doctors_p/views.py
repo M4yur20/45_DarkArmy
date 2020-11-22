@@ -35,16 +35,13 @@ def tconfirm(request):
     return redirect('doctor:dprof')
 
 
-def tupdate(request):
-    id = request.POST.get('id')
-    treatment = Treatment.objects.get(pk=id)
-    f = TreatmentForm1(request.POST, instance=treatment)
-    f.save()
-    return redirect('doctor:dprof')
-
-
-''' a = Article.objects.get(pk=1)
->>> f = ArticleForm(request.POST, instance=a)
->>> f.save()'''
-
+def tupdate(request,id):
+    if request.method == 'POST':
+        treatment = Treatment.objects.get(pk=id)
+        form = TreatmentForm1(request.POST,instance=treatment)
+        form.save()
+        return redirect('doctor:dprof')
+    else:
+        form = TreatmentForm1()
+    return render(request,'doctors_p/addtreat.html',{'form':form,'id':id})
 

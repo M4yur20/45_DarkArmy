@@ -2,9 +2,9 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Notifications</title>
-    <style>
+    <title>Add Treatment</title>
+</head>
+<style>
     body{
         background:black;
         color: whitesmoke;
@@ -96,37 +96,33 @@
         }
       }
 </style>
-</head>
 <body>
-    <div class="container">
-    {% for notification in notifications %}
-    <strong><Notification patient></strong>{{notification.patient.first_name}} {{notification.patient.last_name}}
-    <strong><Estimated Injury></strong>{{notification.prediction}} 
-    <form action="{% url 'doctor:tconfirm' %}" method='POST'>
-        {% csrf_token %}
-        <input type='hidden' name='pk' value={{notification.id}}>
-    </div>
-        <button class="bubbly-button" type="submit">Accept</button>
-    </form> 
-    {% endfor %}  
-    <script>
-        var animateButton = function(e) {
-      
-        e.preventDefault;
-        //reset animation
-        e.target.classList.remove('animate');
-      
-        e.target.classList.add('animate');
-        setTimeout(function(){
-        e.target.classList.remove('animate');
-        },700);
-        };
-      
-        var bubblyButtons = document.getElementsByClassName("bubbly-button");
-      
-        for (var i = 0; i < bubblyButtons.length; i++) {
-        bubblyButtons[i].addEventListener('click', animateButton, false);
-        }
-      </script>
+<div class="container">
+<form action="{% url 'doctor:tupdate' id=id %}" method="post">
+    {% csrf_token %}
+    {{form.as_p}}
+</div>
+    <button class="bubbly-button" type="submit">Update</button>
+</form>
+
+<script>
+    var animateButton = function(e) {
+  
+    e.preventDefault;
+    //reset animation
+    e.target.classList.remove('animate');
+  
+    e.target.classList.add('animate');
+    setTimeout(function(){
+    e.target.classList.remove('animate');
+    },700);
+    };
+  
+    var bubblyButtons = document.getElementsByClassName("bubbly-button");
+  
+    for (var i = 0; i < bubblyButtons.length; i++) {
+    bubblyButtons[i].addEventListener('click', animateButton, false);
+    }
+  </script>
 </body>
 </html>

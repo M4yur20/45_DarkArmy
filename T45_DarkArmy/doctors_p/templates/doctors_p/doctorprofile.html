@@ -215,10 +215,7 @@ a.animated-button.thar-one:before {
         <div class="container">
         <h2 align="center">Your Treatments</h2>
         {% for treat in treatments %}
-            <form action="{% url 'doctor:tupdate'%}" method="post">
-                <input type="hidden" name="id" value={{treat.id}}>
-                <input type="submit" value="Update">
-            </form>
+            <a href="{% url 'doctor:tupdate' id=treat.id %}">Update</a>
         Patient RFID : {{treat.patient.uid}}<br>
         Patient Name : {{treat.patient}}<br>
         Hospital Treated In : {{treat.hospital}}<br>

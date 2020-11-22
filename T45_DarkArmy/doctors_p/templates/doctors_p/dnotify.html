@@ -12,7 +12,7 @@
     <strong><Estimated Injury></strong>{{notification.prediction}} 
     <form action="{% url 'doctor:tconfirm' %}" method='POST'>
         {% csrf_token %}
-        <input type='hidden' name='pk' value={{notification.id}}></input>
+        <input type='hidden' name='pk' value={{notification.id}}>
         <input type='submit' value='Accept'>
     </form> 
     {% endfor %}  

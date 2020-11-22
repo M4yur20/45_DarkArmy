@@ -35,6 +35,7 @@ def tconfirm(request):
     return redirect('doctor:dprof')
 
 
+<<<<<<< Updated upstream
 def tupdate(request):
     id = request.POST.get('id')
     treatment = Treatment.objects.get(pk=id)
@@ -49,3 +50,14 @@ def tupdate(request):
 >>> f = ArticleForm(request.POST, instance=a)
 >>> f.save()'''
 
+=======
+def tupdate(request,id):
+    if request.method == 'POST':
+        treatment = Treatment.objects.get(pk=id)
+        form = TreatmentForm1(request.POST,instance=Treatment)
+        form.save()
+        return redirect('doctor:dprof')
+    else:
+        form = TreatmentForm1()
+    return render(request,'doctors_p/addtreat.html',{'form':form,'id':id})
+>>>>>>> Stashed changes

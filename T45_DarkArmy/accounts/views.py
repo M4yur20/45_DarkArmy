@@ -32,19 +32,23 @@ def nearesthosps(request):
             instance.patient = patient
             instance.save()
             img = cv2.imread(instance.image.path)
-            json_file = open('/Users/mayuragarwal/Desktop/model3.json', 'r')
+            json_file = open(r'C:\Users\mishr\Downloads\model5.json', 'r')
             loaded_model_json = json_file.read()
             json_file.close()
             loaded_model = model_from_json(loaded_model_json)
-            loaded_model.load_weights('/Users/mayuragarwal/Desktop/model3.h5')
+            loaded_model.load_weights(r'C:\Users\mishr\Downloads\model5.h5')
             loaded_model.compile(loss=categorical_crossentropy,
                                  optimizer=Adam(lr=0.001),
                                  metrics=['accuracy'])
-            img = cv2.resize(img, (300, 300), interpolation=cv2.INTER_AREA)
+            if img.shape[0]>300 or img.shape[1]>300:
+                img = cv2.resize(img, (300, 300), interpolation=cv2.INTER_AREA)
+            else:
+                img=cv2.resize(img,(300,300),interpolation=cv2.INTER_CUBIC)
+                
             img = np.array(img, 'float32')
             preds = loaded_model.predict(img.reshape(-1, 300, 300, 3))
             output = labels[np.argmax(preds)]
-
+            
             location_ = patient.address
             location = geolocator.geocode(location_)
             # location coordinates
@@ -69,7 +73,7 @@ def nearesthosps(request):
             doctor_list = nearest.doctor.all()
             for doctor in doctor_list:
                 Notification.objects.create(doctor=doctor, patient=patient, treatment=instance, prediction=output)
-
+            print(preds)
             return render(request, 'accounts/suggestions.html', {'output': output,
                                                                  'hospital': nearest})
     else:

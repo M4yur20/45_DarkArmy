@@ -38,15 +38,13 @@ def tconfirm(request):
 def tupdate(request):
     id = request.POST.get('id')
     treatment = Treatment.objects.get(pk=id)
-    
-
-
     f = TreatmentForm1(request.POST, instance=treatment)
     f.save()
+    return redirect('doctor:dprof')
 
 
 ''' a = Article.objects.get(pk=1)
 >>> f = ArticleForm(request.POST, instance=a)
 >>> f.save()'''
 
-treat, noti
+

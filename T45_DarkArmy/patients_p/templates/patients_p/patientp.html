@@ -156,7 +156,7 @@ a.animated-button.thar-one:before {
     {% for notif in noti %}
         {% if notif.accepted is True %}
     Your Doctor : {{notif.doctor}}<br>
-    Hospital : {{notif.doctor.hospital}}<br>
+    Hospital : {{notif.treatment.hospital}}<br>
     Injury Type : {{notif.treatment.injury_type}}<br>
     Injury Description : {{notif.treatment.injury_description}}
         {%endif%}

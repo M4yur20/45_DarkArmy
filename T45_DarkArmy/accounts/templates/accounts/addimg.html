@@ -87,6 +87,12 @@
         </style>
 </head>
 <body>
+    {% if user.is_authenticated %}
+    <form class="logout" action="{% url 'accounts:logout'%}" method="POST">
+                {% csrf_token %}
+        <button style="border: none;" class="w3-button w3-block" type="submit"> Logout</button>
+    </form>
+    {% endif %}
     <h1 align="center"
     style="padding-top: 80px;padding-bottom: 10px;font-weight: 600;font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif; background-color:#e60000";>Add Injury Image</h1>
     <div class="container-fluid" align="center"

@@ -12,6 +12,7 @@
     <style>
         body{
             background-color: bisque;
+            color:black;
         }
         a.animated-button.victoria-three {
 	border: 2px solid #D24D57;
@@ -27,7 +28,13 @@ a.animated-button.victoria-three:after {
     </style>
 </head>
 <body>
-    <div class="col-md-3 col-sm-3 col-xs-6"> <a href="#" class="btn btn-sm animated-button victoria-three">Go To HomePage</a> </div>
+        {% if user.is_authenticated %}
+    <form class="logout" action="{% url 'accounts:logout'%}" method="POST">
+                {% csrf_token %}
+        <button style="border: none;" class="w3-button w3-block" type="submit"> Logout</button>
+    </form>
+    {% endif %}
+    <div class="col-md-3 col-sm-3 col-xs-6"> <a href="{% url 'home'%}" class="btn btn-sm animated-button victoria-three">Go To HomePage</a> </div><br><br><br><br>
     <h1>Nearest Hospital Info</h1>
     <h2>{{hospital.name}}</h2>
 

@@ -49,4 +49,3 @@ def tupdate(request):
 >>> f = ArticleForm(request.POST, instance=a)
 >>> f.save()'''
 
-treat, noti

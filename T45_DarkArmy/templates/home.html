@@ -13,14 +13,18 @@
         <div class="w3-row w3-large w3-light-grey">
                 {% if user.is_authenticated %}
                 <form action="{% url 'accounts:checkuser'%}" method="post">
-                    {% csrf_token %}
-                    <button style="border: none;" type="submit">Go to your Profile</button>
+                {% csrf_token %}
+                <div class="w3-col s6">
+                <button style="border: none;" class="w3-button w3-block" type="submit">Go to your Profile</button>
+                </div>
                 </form>
                 <form class="logout" action="{% url 'accounts:logout'%}" method="POST">
                 {% csrf_token %}
-                <button style="border: none;" type="submit"> Logout</button><!-- iska placement thek kar -->
+                <div class="w3-col s6">
+                <button style="border: none;" class="w3-button w3-block" type="submit"> Logout</button>
+                </div>
                 {% else %}
-              <div class="w3-col s4">
+                <div class="w3-col s4">
                 <a href="{% url 'accounts:plogin' %}" class="w3-button w3-block" > Login as Patient</a>
             </div>
             <div class="w3-col s4">

@@ -10,39 +10,19 @@ from .forms import *
 from geopy.geocoders import Nominatim
 from geopy.distance import geodesic
 from .utils import get_geo, get_center_coordinates, get_zoom
-<<<<<<< Updated upstream
 from django.contrib.auth.decorators import user_passes_test,login_required
 from notifications.models import Notification
-'''import cv2
-=======
-from django.contrib.auth.decorators import user_passes_test
 
 '''
 import cv2
->>>>>>> Stashed changes
 import numpy as np
 from keras.models import model_from_json
 from keras.losses import categorical_crossentropy
 from keras.optimizers import Adam
 
-<<<<<<< Updated upstream
-labels = ['Bite', 'Burns', 'Cuts', 'Fractures']
-
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
-=======
 labels=['Bite','Burns','Cuts','Fractures']
+'''
 
-'''
->>>>>>> Stashed changes
-=======
-'''
->>>>>>> Stashed changes
-=======
-'''
->>>>>>> Stashed changes
-
-'''
 def nearesthosps(request):
     geolocator = Nominatim(user_agent='accounts')
     if request.method == "POST":
@@ -102,9 +82,6 @@ def nearesthosps(request):
         form = TreatmentForm()
     return render(request, 'accounts/addimg.html', {'form': form})
 
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
 
 def check_patient(user):
     return user.profile.is_patient
@@ -118,12 +95,6 @@ def check_doctor(user):
     return user.profile.is_doctor
 
 
-=======
->>>>>>> Stashed changes
-=======
->>>>>>> Stashed changes
-=======
->>>>>>> Stashed changes
 def logout_view(request):
     if request.method == 'POST':
         logout(request)

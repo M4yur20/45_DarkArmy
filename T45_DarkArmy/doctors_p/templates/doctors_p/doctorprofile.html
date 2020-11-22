@@ -213,7 +213,7 @@ a.animated-button.victoria-two:after {
 </style>
 <body>
 {% if user.is_authenticated %}
-<div class="col-md-3 col-sm-3 col-xs-6"> <a href="#" class="btn btn-sm animated-button thar-one">Go To Homepage</a> </div>
+<div class="col-md-3 col-sm-3 col-xs-6"> <a href="{% url 'home' %}" class="btn btn-sm animated-button thar-one">Go To Homepage</a> </div>
 <div class="col-md-3 col-sm-3 col-xs-6"><a href="{% url 'accounts:hreg'%}" class="btn btn-sm animated-button thar-two">Register a Hospital</a></div>
 <div class="col-md-3 col-sm-3 col-xs-6"><a href="{% url 'doctor:dnotify'%}"class="btn btn-sm animated-button thar-three"> Your Notifications</a></div><br><br><br><br>
 <h1> Your Profile</h1>

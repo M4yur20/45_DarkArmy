@@ -98,15 +98,17 @@
 </style>
 </head>
 <body>
-    <div class="container">
+
     {% for notification in notifications %}
+        <button class="bubbly-button" type="submit">Accept</button>
     <strong><Notification patient></strong>{{notification.patient.first_name}} {{notification.patient.last_name}}
-    <strong><Estimated Injury></strong>{{notification.prediction}} 
+    <strong><Estimated Injury></strong>{{notification.prediction}}<br><br>
     <form action="{% url 'doctor:tconfirm' %}" method='POST'>
         {% csrf_token %}
         <input type='hidden' name='pk' value={{notification.id}}>
-    </div>
-        <button class="bubbly-button" type="submit">Accept</button>
+        </div>
+
+
     </form> 
     {% endfor %}  
     <script>

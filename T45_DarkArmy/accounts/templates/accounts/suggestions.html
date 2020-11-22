@@ -4,8 +4,37 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Suggestions</title>
+    <link rel="stylesheet" href="style2.css">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+        <link href="http://designify.me/code-snippets/animated-buttons/css/btns.css" rel="stylesheet">
+        <link href='http://fonts.googleapis.com/css?family=Ubuntu:400,500,700' rel='stylesheet' type='text/css'>
+        <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+    <style>
+        body{
+            background-color: bisque;
+            color:black;
+        }
+        a.animated-button.victoria-three {
+	border: 2px solid #D24D57;
+}
+a.animated-button.victoria-three:after {
+	background: #D24D57;
+	opacity: .5;
+	-moz-transform: translateX(-50%) translateY(-50%);
+	-ms-transform: translateX(-50%) translateY(-50%);
+	-webkit-transform: translateX(-50%) translateY(-50%);
+	transform: translateX(-50%) translateY(-50%);
+}
+    </style>
 </head>
 <body>
+        {% if user.is_authenticated %}
+    <form class="logout" action="{% url 'accounts:logout'%}" method="POST">
+                {% csrf_token %}
+        <button style="border: none;" class="w3-button w3-block" type="submit"> Logout</button>
+    </form>
+    {% endif %}
+    <div class="col-md-3 col-sm-3 col-xs-6"> <a href="{% url 'home'%}" class="btn btn-sm animated-button victoria-three">Go To HomePage</a> </div><br><br><br><br>
     <h1>Nearest Hospital Info</h1>
     <h2>{{hospital.name}}</h2>
 
@@ -65,5 +94,7 @@ Watch for signs of infection.
     </div>
 
     {% endif %}
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script> 
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
 </body>
 </html>

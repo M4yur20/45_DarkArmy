@@ -21,7 +21,6 @@ from keras.optimizers import Adam
 
 labels = ['Bite', 'Burns', 'Cuts', 'Fractures']
 
-
 def nearesthosps(request):
     geolocator = Nominatim(user_agent='accounts')
     if request.method == "POST":

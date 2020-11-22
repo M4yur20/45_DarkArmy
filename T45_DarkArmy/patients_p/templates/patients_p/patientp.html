@@ -153,11 +153,13 @@ a.animated-button.thar-one:before {
 
     <div class="container">
     <h3 align="center">Your Treatment History</h3>
-    {% for treat in mytreats %}
-    Your Doctor : {{treat.doctor}}<br>
-    Hospital : {{treat.hospital}}<br>
-    Injury Type : {{treat.injury_type}}<br>
-    Injury Description : {{treat.injury_description}}
+    {% for notif in noti %}
+        {% if notif.accepted is True %}
+    Your Doctor : {{notif.doctor}}<br>
+    Hospital : {{notif.treatment.hospital}}<br>
+    Injury Type : {{notif.treatment.injury_type}}<br>
+    Injury Description : {{notif.treatment.injury_description}}
+        {%endif%}
     <br><hr>
     {%endfor%}
     </div>

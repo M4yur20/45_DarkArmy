@@ -101,7 +101,7 @@
     <div class="container">
     {% for notification in notifications %}
     <strong><Notification patient></strong>{{notification.patient.first_name}} {{notification.patient.last_name}}
-    <strong><Estimated Injury></strong>{{notification.prediction}} 
+    <strong><Estimated Injury></strong>{{notification.prediction}} <br><br><br>
     <form action="{% url 'doctor:tconfirm' %}" method='POST'>
         {% csrf_token %}
         <input type='hidden' name='pk' value={{notification.id}}>
